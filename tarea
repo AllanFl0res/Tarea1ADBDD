@@ -1,0 +1,76 @@
+Create database Tarea1
+go
+use tarea1
+go
+--Crear tablas
+create Table Periodos(
+	idPeriodo varchar(5) not null,
+	Horas int not null,
+	Primary Key(idPeriodo)
+);
+
+create Table ClaseDia(
+	idClase varchar(5) not null,
+	Dia varchar(20) not null,
+	Primary Key(idClase)
+);
+
+create Table Horarios(
+	idHorario varchar(5) not null,
+	Horario varchar(7) not null,
+	Primary Key(idHorario)
+);
+
+create Table Cliente(
+	idCliente int not null,
+	Nombre varchar(20) not null,
+	Ubicacion varchar(40) not null,
+	Telefono varchar(8) not null,
+	idPeriodo varchar(5) not null,
+	idClase varchar(5) not null,
+	idHorario varchar(5) not null,
+	Primary Key(idCliente),
+	Foreign Key(idPeriodo) References Periodos(idPeriodo),
+	Foreign Key(idClase) References ClaseDia(idClase),
+	Foreign Key(idHorario) References Horarios(idHorario)
+);
+
+--Insertar Campos
+Insert into Periodos values
+  ('PPL', 10),
+  ('PIL', 9),
+  ('PVL', 5),
+  ('PPS', 2),
+  ('PIS', 16),
+  ('PVS', 6),
+  ('PID-O', 8),
+  ('PVD-O', 16);
+
+Insert into ClaseDia values
+  ('L', 'Laborable'),
+  ('S', 'Sabado'),
+  ('D-F', 'Domingo-Feriado');
+
+Insert into Horarios values
+  ('LP1', '10 a 16'),
+  ('LP2', '18 a 22'),
+  ('LI1', '5 a 10'),
+  ('LI2', '16 a 18'),
+  ('LI3', '22 a 24'),
+  ('LV1', '0 a 5'),
+  ('SP1', '12 a 13'),
+  ('SP2', '19 a 20'),
+  ('SI1', '6 a 12'),
+  ('SI2', '13 a 19'),
+  ('SI3', '20 a 24'),
+  ('SV1', '0 a 6'),
+  ('D-OI1', '11 a 13'),
+  ('D-OI2', '17 a 23'),
+  ('D-OV1', '0 a 11'),
+  ('D-OV2', '13 a 17'),
+  ('D-OV3', '23 a 24');
+
+Insert into Cliente values
+  (1234, 'OPS', 'Porvenir', 11111111, 'PPL', 'L', 'LP2'),
+  (4567, 'MSC', 'Quebrada Seca', 22222222, 'PPS', 'S', 'SP1'),
+  (8970, 'Ceutec', 'Jardines', 33333333, 'PVD-O', 'D-F', 'D-FV3');
